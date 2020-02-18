@@ -1,0 +1,9 @@
+{% if group_list %}
+    <ul>
+    {% for question in group_list %}
+        <li><a href="{% url 'timetable:generate' question.id %}">{{ question.group_dept   }} - {{ question.group_sem   }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
