@@ -11,13 +11,15 @@ class Population():
     def __init__(self,subject_obj_list):
         self.chromosome = []
         self.subject_obj_list = subject_obj_list
-        total_periods = 15
+        total_periods = 40
         number_of_subject = 5
 
-        for i in range(100):
+        for i in range(5):
             self.chromosome.append(Chromosome(subject_obj_list, total_periods, number_of_subject))
         
-        self.chromosome[0].printTable()
+        for i in self.chromosome:
+            i.printTable()
+            print("------------------------------------------")
 
 
 class Chromosome():
@@ -35,8 +37,10 @@ class Chromosome():
                 for i in range(subjects_obj_list[r].span):
                     self.gene.append(Gene(subjects_obj_list[r].name))
                 remaining_periods -= 1
-            else:a
+                subjects_obj_list[r].periods_per_week -= 1
+            else:
                 self.gene.append(Gene("N/A"))
+                remaining_periods -= 1
 
     def getFitness(self):
         fitness = 1
@@ -46,7 +50,7 @@ class Chromosome():
     def printTable(self):
         for i in range(self.total_periods):
             print(self.gene[i].subject, end=" ")
-            if i% 7 == 0:
+            if (i+1) % 8==0:
                 print()
 
 class Gene():
